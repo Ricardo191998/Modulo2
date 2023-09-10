@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Modulo2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_save">Guardar</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="alert_message_success">Reloj Guardado con exito</string>
+    <string name="alert_message_save_success">Error al guardar el reloj</string>
+    <string name="btn_update">Actualizar</string>
+    <string name="btn_delete">Borrar</string>
+    <string name="alert_message_udpate_success">Reloj actualizado con exito</string>
+    <string name="alert_message_udpate_error">Error al actualizar el reloj</string>
+    <string name="dialog_title">Reloj</string>
+    <string name="alert_delete_title">Confirmación</string>
+    <string name="alert_delete_desc">"¿Realmente deseas eliminar el juego "</string>
+    <string name="alert_delete_btn">Aceptar</string>
+    <string name="alert_delete_btn_cancel">Cancelar</string>
+    <string name="alert_delete_success">Juego eliminado con exito</string>
+    <string name="alert_delete_error">No se pudo elimiar el juego</string>
+    <string name="text_user_required">Usuario requerido</string>
+    <string name="text_pass_required">Contraseña requerida</string>
+    <string name="alert_pass_incorrect">Contraseña incorrecta</string>
+    <string name="alert_user_not_valid">Usuario inexistente</string>
+    <string name="alert_create_user_failed">Fallo la creación del usaurio</string>
+    <string name="text_name_required">Nombre requerido</string>
+    <string name="alert_create_user_success">Usuario registrado con éxito</string>
+    <string name="tiet_material_hint">Material</string>
+    <string name="tiet_price_hint">Precio</string>
+    <string name="tiet_name_hint">Nombre</string>
+    <string name="image_desc">Imagen</string>
+    <string name="name_clocK">Nombre del Reloj</string>
+    <string name="brand">Marca</string>
+    <string name="price">price</string>
+    <string name="title_login">Inicia Sesion</string>
+    <string name="text_user_hint">Usuario</string>
+    <string name="text_password_hint">Contraseña</string>
+    <string name="btn_login">Iniciar Session</string>
+    <string name="btn_register">¿Aún no tienes cuenta?</string>
+    <string name="title_register">Registrate</string>
+    <string name="text_hint_name">Nombre</string>
+    <string name="text_hint_email">Email</string>
+    <string name="btn_register_register">Registrar</string>
+    <string name="text_not_registert">¡No hay registros!</string>
+    <string name="text_add_element">Agregrar elemento</string>
+    <string name="item">Item</string>
+</resources>
