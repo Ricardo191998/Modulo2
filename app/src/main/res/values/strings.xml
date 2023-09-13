@@ -43,4 +43,10 @@
     <string name="text_not_registert">¡No hay registros!</string>
     <string name="text_add_element">Agregrar elemento</string>
     <string name="item">Item</string>
+    <string name="title">Titulo</string>
+    <string name="author">Autor</string>
+    <string name="pages">páginas</string>
+    <string name="editorial">editorial</string>
+    <string name="isbn">isbn</string>
+    <string name="alert_error_conection">Fallo la conexión</string>
 </resources>

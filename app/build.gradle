@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
 }
 
 android {
@@ -37,8 +36,6 @@ android {
 
 }
 
-def room_version = "2.5.2"
-
 dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -51,10 +48,13 @@ dependencies {
     // Piccaso
     implementation 'com.squareup.picasso:picasso:2.8'
 
-    //Room
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    //Para retrofit y Gson
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     //Corrutinas con alcance lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+
+    //Imágenes con bordes redondeados
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }
