@@ -1,5 +1,6 @@
 package com.example.modulo2.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,6 +28,7 @@ class BooksListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var repository: BookRepository
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class BooksListFragment : Fragment() {
     ): View? {
         _binding = FragmentBooksListBinding.inflate(inflater, container, false)
 
+        mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.whip)
 
         return binding.root
     }
@@ -61,6 +64,7 @@ class BooksListFragment : Fragment() {
                         binding.rvBooks.apply {
                             layoutManager = LinearLayoutManager(requireContext())
                             adapter = BooksAdapter(books){ book ->
+                                mediaPlayer?.start()
                                 book.id?.let { id ->
                                     requireActivity().supportFragmentManager.beginTransaction()
                                         .replace(R.id.fragment_container, BookDetailFragment.newInstance(id))

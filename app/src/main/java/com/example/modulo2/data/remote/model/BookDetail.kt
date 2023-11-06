@@ -7,6 +7,8 @@ data class BookDetail(
     var id: String? = null,
     @SerializedName("thumbnail")
     var thumbnail: String? = null,
+    @SerializedName("videoUrl")
+    var videoUrl: String? = null,
     @SerializedName("title")
     var title: String? = null,
     @SerializedName("author")
