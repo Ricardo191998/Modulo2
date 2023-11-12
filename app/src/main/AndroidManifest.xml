@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".application.BooksRFApp"
@@ -16,13 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Modulo2"
         tools:targetApi="31">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.Modulo2"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Modulo2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

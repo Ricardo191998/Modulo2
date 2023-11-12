@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
 
         val splashTimeOut = 2000
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, splashTimeOut.toLong())
     }

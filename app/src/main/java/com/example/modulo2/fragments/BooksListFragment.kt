@@ -1,5 +1,6 @@
 package com.example.modulo2.fragments
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.modulo2.LoginActivity
 import com.example.modulo2.R
 import com.example.modulo2.adapters.BooksAdapter
 import com.example.modulo2.application.BooksRFApp
@@ -17,6 +19,8 @@ import com.example.modulo2.data.BookRepository
 import com.example.modulo2.data.remote.model.Book
 import com.example.modulo2.databinding.FragmentBooksListBinding
 import com.example.modulo2.util.Constants
+import com.google.android.gms.maps.GoogleMap
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,6 +34,8 @@ class BooksListFragment : Fragment() {
     private lateinit var repository: BookRepository
     private var mediaPlayer: MediaPlayer? = null
 
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -42,6 +48,8 @@ class BooksListFragment : Fragment() {
 
         mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.whip)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
         return binding.root
     }
 
@@ -49,6 +57,12 @@ class BooksListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         repository = (requireActivity().application as BooksRFApp).repository
+
+        binding.btnCerrarSesion.setOnClickListener {
+            firebaseAuth.signOut()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            requireActivity().finish()
+        }
 
         lifecycleScope.launch {
             val call: Call<List<Book>> = repository.getBooks()

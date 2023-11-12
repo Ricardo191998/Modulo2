@@ -19,12 +19,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.media.MediaPlayer
+import android.util.Log
+import com.example.modulo2.data.remote.model.Location
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.internal.artificialFrame
 
 
 private const val BOOK_ID = "book_id"
 
-class BookDetailFragment : Fragment() {
+class BookDetailFragment : Fragment(), OnMapReadyCallback {
 
     private var bookId: String? = null
 
@@ -32,6 +41,9 @@ class BookDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var repository: BookRepository
     private var mediaPlayer: MediaPlayer? = null
+
+
+    private lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +58,16 @@ class BookDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentBookDetailBinding.inflate(inflater, container, false)
 
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map)
+
+        if (mapFragment is SupportMapFragment) {
+            // Asynchronously load the map and set the callback to this fragment
+            mapFragment.getMapAsync(this)
+        } else {
+            // Handle the case where the fragment is not a SupportMapFragment
+            // Log an error, show a message, or take appropriate action
+            Log.d("LOGS","NO es support Fragment")
+        }
 
         binding.fab.setOnClickListener {
             mediaPlayer?.start()
@@ -89,7 +111,7 @@ class BookDetailFragment : Fragment() {
                                     .into(ivImage)
 
                                 val videoUri = Uri.parse(response.body()?.videoUrl)
-                                vvVideo.setVideoURI(videoUri)
+                                /*vvVideo.setVideoURI(videoUri)
                                 vvVideo.setOnPreparedListener { mediaplayer ->
                                     //pbVideo.visibility = View.GONE
                                     mediaplayer.start()
@@ -107,6 +129,9 @@ class BookDetailFragment : Fragment() {
                                         mediaplayer.start()
                                     }
                                 }
+                                */
+
+                                createMarker(response.body()?.location!!)
                             }
 
                         }
@@ -126,7 +151,10 @@ class BookDetailFragment : Fragment() {
 
         return binding.root
     }
-
+    override fun onResume() {
+        super.onResume()
+        if(!::map.isInitialized) return
+    }
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -140,6 +168,26 @@ class BookDetailFragment : Fragment() {
                     putString(BOOK_ID, bookId)
                 }
             }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+    }
+    private fun createMarker(location: Location){
+        val coordinates = LatLng(location.latitude!!.toDouble() , location.longitud!!.toDouble())
+
+        val marker = MarkerOptions()
+            .position(coordinates)
+            .title("Libreria ")
+            .snippet("Libro disponible en esta libreria")
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.person))
+
+        map.addMarker(marker)
+        map.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(coordinates, 18f),
+            4000,
+            null
+        )
     }
 
 }
